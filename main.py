@@ -1,3 +1,4 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -7,8 +8,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import ElementClickInterceptedException, NoSuchElementException
 import time
 
-chrome_driver_path = r"C:\Users\Samet\AppData\Local\Programs\Python\Python310\chromedriver.exe"
+chrome_driver_path = os.environ['chrome_driver_path']
 ser = Service(chrome_driver_path)
+google_form = os.environ['google_form']
 
 BROWSER_HEADER = {
     "Accept-Language": "en-US",
@@ -57,7 +59,7 @@ counter = 0
 
 while counter < len(house_list):
 
-    driver.get("https://forms.gle/9SAKhxyACFq8k8KA8")
+    driver.get(google_form)
     time.sleep(3)
     text_areas = driver.find_elements(By.CLASS_NAME, "quantumWizTextinputPaperinputInput")
     text_areas[0].send_keys(address_list[counter])
